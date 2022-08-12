@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -33,13 +34,16 @@ public class PostagensModel {
 	private Date date=new java.sql.Date(System.currentTimeMillis());
 	
 
-	@NotNull
+	@NotNull(message = "O Atributo Nome Parceiro é Obrigatório!")
 	@Size (min = 5, max =255)
 	private String parceiros_nome;
-	@NotNull
+	
+	@NotNull(message = "O Atributo Parceiro e-mail é Obrigatório!")
 	@Size (min = 5, max =255)
+	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String parceiros_email;
-	@NotNull
+	
+	@NotNull(message = "O Atributo Site Parceiro é Obrigatório!")
 	@Size (min = 5, max =255)
 	private String parceiros_site;
 	
@@ -113,9 +117,5 @@ public class PostagensModel {
 
 	public void setUsuario(UsuarioModel usuario) {
 		this.usuario = usuario;
-	} 
-	
-	
-	
-
+	}
 }

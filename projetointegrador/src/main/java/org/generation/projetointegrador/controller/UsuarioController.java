@@ -65,6 +65,5 @@ public class UsuarioController {
 	        return usuarioService.atualizarUsuario(usuario)
 	            .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-	    }
-	
+	    }	
 }
