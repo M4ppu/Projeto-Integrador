@@ -32,7 +32,7 @@ public class UsuarioModel {
 	private String usuario;
 	
 	@NotNull
-	private Integer senha;
+	private String senha;
 	
 	private  String foto;
 	
@@ -64,11 +64,11 @@ public class UsuarioModel {
 		this.usuario = usuario;
 	}
 
-	public Integer getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(Integer senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
