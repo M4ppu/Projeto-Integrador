@@ -31,6 +31,9 @@ public class UsuarioModel {
 	@Size (min = 3, max = 100)
 	private String nome;
 	
+	@NotBlank(message = "Não pode ter espaços em branco.")
+	private String sobrenome;
+	
 	@Schema(example = "email@email.com.br")
 	@NotNull(message = "O Atributo Usuário é Obrigatório!")
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
@@ -43,9 +46,23 @@ public class UsuarioModel {
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private  String foto;
 	
+	private String tipo;
+	
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("usuario")
 	private List<PostagensModel>postagens;
+	
+	public UsuarioModel(Long id, String nome, String sobrenome, String usuario, String senha, String foto, String tipo) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+		this.tipo = tipo;
+	}
+	
+	public UsuarioModel() {	}
 
 	public Long getId() {
 		return id;
@@ -61,6 +78,14 @@ public class UsuarioModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getUsuario() {
@@ -93,6 +118,14 @@ public class UsuarioModel {
 
 	public void setPostagens(List<PostagensModel> postagens) {
 		this.postagens = postagens;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	

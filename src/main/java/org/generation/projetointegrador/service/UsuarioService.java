@@ -22,7 +22,8 @@ public class UsuarioService {
 	public Optional<UsuarioModel> cadastrarUsuario(UsuarioModel usuario) {
 		
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
-			return Optional.empty();
+			throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
 		
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 		
@@ -53,8 +54,11 @@ public class UsuarioService {
 
                 usuarioLogin.get().setId(usuario.get().getId());
                 usuarioLogin.get().setNome(usuario.get().getNome());
+                usuarioLogin.get().setSobrenome(usuario.get().getSobrenome());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
-                usuarioLogin.get().setToken(gerarBasicToken(usuarioLogin.get().getUsuario(),        usuarioLogin.get().getSenha()));
+                usuarioLogin.get().setTipo(usuario.get().getTipo());
+                usuarioLogin.get().setToken(gerarBasicToken(usuarioLogin.get().getUsuario(),
+                usuarioLogin.get().getSenha()));
                 usuarioLogin.get().setSenha(usuario.get().getSenha());
                 
                 return usuarioLogin;
