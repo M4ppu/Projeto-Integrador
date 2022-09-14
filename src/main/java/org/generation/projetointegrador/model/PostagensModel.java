@@ -1,5 +1,6 @@
 package org.generation.projetointegrador.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -25,25 +28,21 @@ public class PostagensModel {
 	private Long id;
 	
 	
-	@NotNull
 	@Size (min = 5, max =100)
 	private String titulo;
 	
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date=new java.sql.Date(System.currentTimeMillis());
+	@UpdateTimestamp
+	private LocalDateTime data;
 	
 
-	@NotNull(message = "O Atributo Nome Parceiro é Obrigatório!")
 	@Size (min = 5, max =255)
 	private String parceiros_nome;
 	
-	@NotNull(message = "O Atributo Parceiro e-mail é Obrigatório!")
 	@Size (min = 5, max =255)
 	@Email(message = "O Atributo Usuário deve ser um email válido!")
 	private String parceiros_email;
 	
-	@NotNull(message = "O Atributo Site Parceiro é Obrigatório!")
 	@Size (min = 5, max =255)
 	private String parceiros_site;
 	
@@ -71,12 +70,13 @@ public class PostagensModel {
 		this.titulo = titulo;
 	}
 
-	public Date getDate() {
-		return date;
+	
+	public LocalDateTime getData() {
+		return data;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
 	public String getParceiros_nome() {
