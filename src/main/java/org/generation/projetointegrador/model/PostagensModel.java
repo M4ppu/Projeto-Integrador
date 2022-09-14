@@ -35,6 +35,7 @@ public class PostagensModel {
 	@UpdateTimestamp
 	private LocalDateTime data;
 	
+	private String foto;	
 
 	@Size (min = 5, max =255)
 	private String parceiros_nome;
@@ -60,6 +61,14 @@ public class PostagensModel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public String getTitulo() {
