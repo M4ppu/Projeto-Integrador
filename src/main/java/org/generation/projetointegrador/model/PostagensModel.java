@@ -1,20 +1,23 @@
 package org.generation.projetointegrador.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,6 +57,14 @@ public class PostagensModel {
 	@ManyToOne
 	@JsonIgnoreProperties("Usuario")
 	private UsuarioModel usuario;
+	
+	@OneToMany(mappedBy="postagem",fetch=FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)	
+	@JsonIgnoreProperties("Like")
+	private List<PostagensLikeModel> like;
+	
+	@JsonIgnoreProperties("qtdLike")
+	private Integer qtd_like;
 
 	public Long getId() {
 		return id;
@@ -127,4 +138,21 @@ public class PostagensModel {
 	public void setUsuario(UsuarioModel usuario) {
 		this.usuario = usuario;
 	}
+
+	public List<PostagensLikeModel> getLike() {
+		return like;
+	}
+
+	public void setLike(List<PostagensLikeModel> like) {
+		this.like = like;
+	}
+
+	public Integer getQtd_like() {
+		return like.size();
+	}
+
+	public void setQtd_like(Integer qtd_like) {
+		this.qtd_like = qtd_like;
+	}
+			
 }
