@@ -2,9 +2,7 @@ package org.generation.projetointegrador.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
@@ -39,16 +36,6 @@ public class PostagensModel {
 	private LocalDateTime data;
 	
 	private String foto;	
-
-	@Size (min = 5, max =255)
-	private String parceiros_nome;
-	
-	@Size (min = 5, max =255)
-	@Email(message = "O Atributo Usuário deve ser um email válido!")
-	private String parceiros_email;
-	
-	@Size (min = 5, max =255)
-	private String parceiros_site;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("Postagens")
@@ -97,30 +84,6 @@ public class PostagensModel {
 
 	public void setData(LocalDateTime data) {
 		this.data = data;
-	}
-
-	public String getParceiros_nome() {
-		return parceiros_nome;
-	}
-
-	public void setParceiros_nome(String parceiros_nome) {
-		this.parceiros_nome = parceiros_nome;
-	}
-
-	public String getParceiros_email() {
-		return parceiros_email;
-	}
-
-	public void setParceiros_email(String parceiros_email) {
-		this.parceiros_email = parceiros_email;
-	}
-
-	public String getParceiros_site() {
-		return parceiros_site;
-	}
-
-	public void setParceiros_site(String parceiros_site) {
-		this.parceiros_site = parceiros_site;
 	}
 
 	public TemaModel getTema() {
